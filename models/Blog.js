@@ -16,7 +16,7 @@ Blog.init(
       allowNull: false,
     },
     Blog_Content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     Manga_title: {
       type: DataTypes.STRING,

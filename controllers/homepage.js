@@ -11,11 +11,13 @@ router.get('/', async (req, res) => {
         },
       ],
     });
-    const blogs = mainPageData.map((blog) => blog.get({ plain: true }));
+    // const blogs = mainPageData.map((blog) => blog.get({ plain: true }));
+    console.log(mainPageData + "==============================")
     res.render('homepage', {
       ...blogs,
       logged_in: req.session.logged_in
     })
+  
     res.status(200).json(blogs);
   } catch (err) {
     res.status(500).json(err);
