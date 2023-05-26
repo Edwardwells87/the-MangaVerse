@@ -15,11 +15,11 @@ Blog.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
+    Blog_Content: {
       type: DataTypes.STRING,
     },
     Manga_title: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     user_id: {
