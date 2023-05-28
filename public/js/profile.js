@@ -1,26 +1,28 @@
-const newFormHandler = async (event) => {
+const newBlogHandler = async (event) => {
+  const submitButton = document.getElementById('create')
   event.preventDefault();
-
-  const name = document.querySelector('#blog-name').value.trim();
-  const blogName = document.querySelector('#manga-name').value.trim();
-  const body = document.querySelector('#blog-body').value.trim();
-
-  if (name && blogName && body) {
-    const response = await fetch(`/api/projects`, {
+  const blogName = document.querySelector('#blog-name').value;
+  const blogBody = document.querySelector('#blog-body').value;
+  const mangaBody = document.querySelector('#manga-name').value;
+  console.log(blogBody,blogName,mangaBody)
+  if (blogBody && blogName && mangaBody) {
+    console.log(blogBody,blogName,mangaBody)
+    const response = await fetch('/api/users', {
       method: 'POST',
-      body: JSON.stringify({ name, blogName, body }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: JSON.stringify({blogBody,blogName,mangaBody}),
+      headers: { 'Content-Type': 'application/json' }
     });
-
     if (response.ok) {
-      document.location.replace('/profile');
+      console.log(blogBody,blogName,mangaBody)
+      console.log(response)
+      // document.location.replace('/profile');
     } else {
-      alert('Try Again');
+      alert(response);
     }
   }
-};
+  };
+
+
 
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
@@ -40,8 +42,4 @@ const delButtonHandler = async (event) => {
 
 document
   .querySelector('.new-blog-form')
-  .addEventListener('submit', newFormHandler);
-
-document
-  .querySelector('.blog-list')
-  .addEventListener('click', delButtonHandler);
+  .addEventListener('submit', newBlogHandler);

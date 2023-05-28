@@ -1,13 +1,18 @@
 const router = require('express').Router();
 const { Blog } = require('../../models');
-const withAuth = require("../../utils/auth")
+const withAuth = require('../../utils/auth');
+const { User } = require('../../models');
 router.post('/', withAuth, async (req, res) => {
   try {
+    const { blogName, blogBody, mangaBody } = req.body;
     const newBlog = await Blog.create({
-      ...req.body,
+      
+      Blog_Name: blogName,
+      Blog_Content: blogBody,
+      Manga_title: mangaBody,
       user_id: req.session.user_id,
     });
-
+console.log('new blog data', newBlog)
     res.status(200).json(newBlog);
   } catch (err) {
     res.status(400).json(err);

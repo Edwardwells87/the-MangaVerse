@@ -1,4 +1,5 @@
-const loginFormHandl = async (event) => {
+const loginFormHandler = async (event) => {
+  const button2 = document.getElementById('login')
   event.preventDefault();
 
   const email = document.querySelector('#email-login').value.trim()
@@ -16,6 +17,7 @@ const loginFormHandl = async (event) => {
   }
 }
 const signupFormHandler = async (event) => {
+  const button1 = document.getElementById("signup")
   event.preventDefault();
 
   const name = document.querySelector('#name-signup').value.trim();
@@ -30,6 +32,7 @@ const signupFormHandler = async (event) => {
     });
 
     if (response.ok) {
+      console.log(name, email, password)
       document.location.replace('/profile');
     } else {
       alert(response);

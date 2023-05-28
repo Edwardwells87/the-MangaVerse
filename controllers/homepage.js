@@ -11,14 +11,14 @@ router.get('/', async (req, res) => {
         },
       ],
     });
-    // const blogs = mainPageData.map((blog) => blog.get({ plain: true }));
-    console.log(mainPageData + "==============================")
+   const blogs = mainPageData.map((blog) => blog.get({ plain: true }));
+    console.log(blogs + "==============================")
     res.render('homepage', {
-      ...blogs,
+      blogs,
       logged_in: req.session.logged_in
     })
   
-    res.status(200).json(blogs);
+   
   } catch (err) {
     res.status(500).json(err);
   }
@@ -28,8 +28,12 @@ router.get('/profile', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Blog }]
+      include: [{ 
+        model: Blog,
+        include: [{ model: User, attributes: ['name'] }]
+      }]
     });
+
     const user = userData.get({ plain: true });
     res.render('profile', {
       ...user,
