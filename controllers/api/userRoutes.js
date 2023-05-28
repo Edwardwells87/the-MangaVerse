@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Blog } = require('../../models');
 const withAuth = require("../../utils/auth")
 
 router.post('/', async (req, res) => {
@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-
+console.log('logged in')
       res.json({ user: userData, message: 'Welcome back' });
     });
 
@@ -51,6 +51,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req,res)=>{
   if(req.session.logged_in){
       req.session.destroy(()=>{
+        console.log('logged out')
           res.status(204).end();
       });
   } else{
