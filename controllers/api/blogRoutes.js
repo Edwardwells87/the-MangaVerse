@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 try{
   const newBlog = await Blog.create({
       ...req.body,
-      member_id: req.session.user_id,
+      user_id: req.session.user_id,
   });
   res.status(200).json(newBlog);
 } catch(err){
