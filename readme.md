@@ -2,7 +2,7 @@
 
 I have created a simple command line interface system to manage employees.
 
-![Screen Shot](./Assets/MicroManagerScreenShot.png)
+![Screen Shot](./public/assets/images/Manga-VerseScreenShot.png)
 
 ## Features 
 - **Blog Creation** create a blog that allows other users to hear what you have to say about your favorite Manga series. 
