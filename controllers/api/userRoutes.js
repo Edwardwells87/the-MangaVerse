@@ -3,22 +3,24 @@ const { User, Blog } = require('../../models');
 const withAuth = require("../../utils/auth")
 
 router.post('/', async (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect('/login');
-  } else {
+  // if (!req.session.loggedIn) {
+  //   res.redirect('/login');
+  // } else {
   try {
     const userData = await User.create(req.body);
-
+    console.log('user data is', userData)
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
       res.status(200).json(userData);
     });
+    console.log('req.session is', req.session);
   } catch (err) {
     res.status(400).json(err);
-  }}
-});
+  }
+}
+);
 
 router.post('/login', async (req, res) => {
   try {
@@ -39,7 +41,7 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-console.log('logged in')
+      console.log('logged in')
       res.json({ user: userData, message: 'Welcome back' });
     });
 
@@ -48,14 +50,14 @@ console.log('logged in')
   }
 });
 
-router.post('/logout', (req,res)=>{
-  if(req.session.logged_in){
-      req.session.destroy(()=>{
-        console.log('logged out')
-          res.status(204).end();
-      });
-  } else{
-      res.status(404).end();
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      console.log('logged out')
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
   }
 });
 
